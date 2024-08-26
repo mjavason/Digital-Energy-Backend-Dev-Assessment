@@ -22,12 +22,12 @@ export function setupSwagger(app: Express, url: string) {
           url,
         },
       ],
-      tags: [
-        {
-          name: 'Default',
-          description: 'Default API Operations that come inbuilt',
-        },
-      ],
+      // tags: [
+      //   {
+      //     name: 'Default',
+      //     description: 'Default API Operations that come inbuilt',
+      //   },
+      // ],
     },
     apis: ['**/*.ts'],
   };
