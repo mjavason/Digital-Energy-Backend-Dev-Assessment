@@ -23,7 +23,6 @@ setupSwagger(app, BASE_URL);
 //#endregion App Setup
 
 //#region Code here
-
 /**
  * @swagger
  * /assessment/{id}:
@@ -77,7 +76,6 @@ app.get('/assessment/:id', async (req: Request, res: Response) => {
 //#endregion
 
 //#region Server Setup
-
 /**
  * @swagger
  * /:
