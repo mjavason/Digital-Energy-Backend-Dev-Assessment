@@ -23,36 +23,60 @@ setupSwagger(app, BASE_URL);
 //#endregion App Setup
 
 //#region Code here
-console.log('Hello world');
-//#endregion
-
-//#region Server Setup
 
 /**
  * @swagger
- * /api:
+ * /assessment/{id}:
  *   get:
- *     summary: Call a demo external API (httpbin.org)
- *     description: Returns an object containing demo content
- *     tags: [Default]
+ *     summary: Fetch an object from the external API (restful-api.dev)
+ *     description: Returns the object from the external API based on the given ID.
+ *     tags: [Assessment]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 10
+ *         required: true
+ *         description: Numeric ID between 1 and 10 to fetch the object.
  *     responses:
  *       '200':
  *         description: Successful.
  *       '400':
  *         description: Bad request.
+ *       '500':
+ *         description: Failed to call external API.
  */
-app.get('/api', async (req: Request, res: Response) => {
+app.get('/assessment/:id', async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id, 10);
+
+  // Validate if the ID is between 1 and 10
+  if (isNaN(id) || id < 1 || id > 10) {
+    return res
+      .status(400)
+      .send({ error: 'ID must be an integer between 1 and 10' });
+  }
+
   try {
-    const result = await axios.get('https://httpbin.org');
+    // Make a call to the external API using the ID
+    const result = await axios.get(`https://api.restful-api.dev/objects/${id}`);
+
+    // Send the result back
     return res.send({
-      message: 'Demo API called (httpbin.org)',
-      data: result.status,
+      success: true,
+      message: `External API called with ID ${id}`,
+      data: result.data,
     });
   } catch (error: any) {
     console.error('Error calling external API:', error.message);
     return res.status(500).send({ error: 'Failed to call external API' });
   }
 });
+
+//#endregion
+
+//#region Server Setup
 
 /**
  * @swagger
@@ -88,6 +112,7 @@ app.use((req: Request, res: Response) => {
     .json({ success: false, message: 'API route does not exist' });
 });
 
+// Global error handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   // throw Error('This is a sample error');
 

@@ -2,6 +2,7 @@
 
 AP1: https://api.restful-api.dev/objects/{id}
 ACTION: GET
+
 1. Create an API that accepts an parameter (integer between 1 - 10). This parameter is used to consume the endpoint above, returning the result from the endpoint.
 2. Push the changes to your git repository.
 3. Deploy your assessment to any free hosting platform for review. If unable to find one, ignore this item.
