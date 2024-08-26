@@ -5,12 +5,13 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import { setupSwagger } from './swagger.config';
+import { pingSelf } from './functions';
 
 //#region App Setup
 const app = express();
 
 dotenv.config({ path: './.env' });
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 app.use(express.json());
@@ -100,7 +101,7 @@ app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-// (for render services) Keep the API awake by pinging it periodically
-// setInterval(pingSelf(BASE_URL), 600000);
+// (for free render services) Keep the API awake by pinging it periodically
+setInterval(() => pingSelf(BASE_URL), 600000);
 
 //#endregion

@@ -7,13 +7,14 @@ export function setupSwagger(app: Express, url: string) {
     swaggerDefinition: {
       openapi: '3.0.0',
       info: {
-        title: 'Typescript SFA',
+        title: 'Digital-Energy-Backend-Dev-Assessment',
         version: '1.0.0',
         description:
-          'This is a single file typescript template app for faster idea testing and prototyping. It contains tests, one demo root API call, basic async error handling, one demo axios call and .env support.',
+          'You are expected to attempt the assessment with your preferred language/framework, push your changes to your git repository, deploy your assessment to any free hosting platform.',
         contact: {
           name: 'Orji Michael',
           email: 'orjimichael4886@gmail.com',
+          url: 'https://github.com/mjavason',
         },
       },
       servers: [

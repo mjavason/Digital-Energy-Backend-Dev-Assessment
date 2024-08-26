@@ -10,3 +10,4 @@ export async function pingSelf(url: string) {
     return false;
   }
 }
+
